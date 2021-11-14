@@ -97,18 +97,19 @@ function ChatRoom() {
   };
   function EnterKey(e) {
     e.preventDefault();
-    setKey(formValue);
-    if (key == "hey") {
-      setFormValue("");
+    if (formValue == "hey") {
       setLocked(false);
       setPlaceholder("Write your message");
     }
+    setFormValue("");
+
+
   }
   return (
     <>
       <main>
         {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          messages.map((msg) => <ChatMessage key={msg.id} message={msg} locked={locked} />)}
 
         <span ref={dummy}></span>
       </main>
@@ -145,7 +146,7 @@ function ChatMessage(props) {
             photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
           }
         />
-        <p>{text}</p>
+        {props.locked? (<p>{text}</p>):<p>{decryptString(text, "63i512j0i512l8.1195j0j7&s")}</p>}
       </div>
     </>
   );
