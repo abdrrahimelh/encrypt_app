@@ -7,7 +7,7 @@ import "firebase/auth";
 import "firebase/analytics";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-
+import DisplayImage from "./components/keycheck";
 firebase.initializeApp({
   apiKey: "AIzaSyABEPMeLah3wCOyKa38gz-oxByUzZllTEg",
   authDomain: "chat-encrypt.firebaseapp.com",
@@ -34,6 +34,7 @@ function App() {
 
       <section>{user ? <ChatRoom /> : <SignIn />}</section>
     </div>
+
   );
 }
 
@@ -67,9 +68,10 @@ function SignOut() {
 
 function ChatRoom() {
   const [locked, setLocked] = useState(true);
-  const [key, setKey] = useState("");
-  const [placeholder, setPlaceholder] = useState("enter todays key");
+  const [type, setType] = useState("file");
+  const [style, setStyle] = useState({ display: 'none' });
 
+  const [placeholder, setPlaceholder] = useState("enter todays key");
   const dummy = useRef();
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt").limit(100);
@@ -102,14 +104,14 @@ function ChatRoom() {
       setPlaceholder("Write your message");
     }
     setFormValue("");
-
-
   }
   return (
     <>
       <main>
         {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} locked={locked} />)}
+          messages.map((msg) => (
+            <ChatMessage key={msg.id} message={msg} locked={locked} />
+          ))}
 
         <span ref={dummy}></span>
       </main>
@@ -119,15 +121,19 @@ function ChatRoom() {
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
             placeholder={placeholder}
+           
+           
           />
           {locked ? (
-            <button onClick={EnterKey}>🔒</button>
+
+            <button  onClick={EnterKey}>🔒</button>
           ) : (
             <button type="submit" disabled={!formValue}>
               🕊️
             </button>
           )}
         </form>
+        
       </div>
     </>
   );
@@ -146,7 +152,11 @@ function ChatMessage(props) {
             photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
           }
         />
-        {props.locked? (<p>{text}</p>):<p>{decryptString(text, "63i512j0i512l8.1195j0j7&s")}</p>}
+        {props.locked ? (
+          <p>{text}</p>
+        ) : (
+          <p>{decryptString(text, "63i512j0i512l8.1195j0j7&s")}</p>
+        )}
       </div>
     </>
   );
