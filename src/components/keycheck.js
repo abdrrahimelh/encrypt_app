@@ -1,36 +1,4 @@
-import React, { Component } from "react";
-
-class DisplayImage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: null
-    };
-
-    this.onImageChange = this.onImageChange.bind(this);
-  }
-
-  onImageChange = event => {
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      this.setState({
-        image: URL.createObjectURL(img)
-      });
-    }
-  };
-
-  render() {
-    return (
-      <div>
-        <div>
-          <div className='m-10'>
-            <img src={this.state.image} />
-            <h1>Select Image</h1>
-            <input type="file" name="myImage" onChange={this.onImageChange} />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-export default DisplayImage;
+import React from 'react';
+export const hashed_key="c54adf18d408a23833e2fc602d02766314b8dd92d1c43bbd21e75e1e2bedbd12";
+const KEYCHECK = props => <h1>Home</h1>;
+export default KEYCHECK;

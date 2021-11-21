@@ -7,7 +7,8 @@ import "firebase/auth";
 import "firebase/analytics";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import DisplayImage from "./components/keycheck";
+import {hashed_key} from "./components/keycheck"
+import sha256 from "sha256"
 firebase.initializeApp({
   apiKey: "AIzaSyABEPMeLah3wCOyKa38gz-oxByUzZllTEg",
   authDomain: "chat-encrypt.firebaseapp.com",
@@ -17,12 +18,12 @@ firebase.initializeApp({
   appId: "1:813966482173:web:87b975e973257ea95b7c94",
   measurementId: "G-ZZEVPRYJJK",
 });
-
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const analytics = firebase.analytics();
 
 function App() {
+  
   const [user] = useAuthState(auth);
 
   return (
@@ -34,7 +35,6 @@ function App() {
 
       <section>{user ? <ChatRoom /> : <SignIn />}</section>
     </div>
-
   );
 }
 
@@ -67,9 +67,10 @@ function SignOut() {
 }
 
 function ChatRoom() {
+  const [KEYY, setKEYY] = useState('');
   const [locked, setLocked] = useState(true);
   const [type, setType] = useState("file");
-  const [style, setStyle] = useState({ display: 'none' });
+  const [style, setStyle] = useState({ display: "none" });
 
   const [placeholder, setPlaceholder] = useState("enter todays key");
   const dummy = useRef();
@@ -85,8 +86,8 @@ function ChatRoom() {
 
     const { uid, photoURL } = auth.currentUser;
     const { encryptString, decryptString } = new StringCrypto();
-    let encryptedString = encryptString(formValue, "63i512j0i512l8.1195j0j7&s");
-    console.log(decryptString(encryptedString, "63i512j0i512l8.1195j0j7&s"));
+    console.log("sendingwith this key "+KEYY)
+    let encryptedString = encryptString(formValue, KEYY);
     await messagesRef.add({
       text: encryptedString,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -99,41 +100,46 @@ function ChatRoom() {
   };
   function EnterKey(e) {
     e.preventDefault();
-    if (formValue == "hey") {
+    if ((sha256(formValue) == hashed_key)&& (locked)) {
       setLocked(false);
+      setKEYY(formValue);
+      console.log(KEYY + " changed key")
       setPlaceholder("Write your message");
     }
     setFormValue("");
   }
+
+
+ 
+
   return (
     <>
       <main>
         {messages &&
           messages.map((msg) => (
-            <ChatMessage key={msg.id} message={msg} locked={locked} />
+            <ChatMessage key={msg.id} message={msg} locked={locked} KEY={KEYY} />
           ))}
 
         <span ref={dummy}></span>
       </main>
       <div>
         <form onSubmit={sendMessage}>
-          <input
-            value={formValue}
-            onChange={(e) => setFormValue(e.target.value)}
-            placeholder={placeholder}
-           
-           
-          />
-          {locked ? (
+          
+            <input
+              value={formValue}
+              onChange={(e) => setFormValue(e.target.value)}
+              placeholder={placeholder}
+            />
+         
 
-            <button  onClick={EnterKey}>🔒</button>
+          {locked ? (
+            <button onClick={EnterKey}>🔒</button>
           ) : (
             <button type="submit" disabled={!formValue}>
               🕊️
             </button>
           )}
         </form>
-        
       </div>
     </>
   );
@@ -141,6 +147,8 @@ function ChatRoom() {
 
 function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
+  const KEY=props.KEY
+  console.log("inside chatmessage"+KEY)
 
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
   const { encryptString, decryptString } = new StringCrypto();
@@ -155,7 +163,7 @@ function ChatMessage(props) {
         {props.locked ? (
           <p>{text}</p>
         ) : (
-          <p>{decryptString(text, "63i512j0i512l8.1195j0j7&s")}</p>
+          <p>{decryptString(text, KEY)}</p>
         )}
       </div>
     </>

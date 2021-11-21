@@ -11,7 +11,11 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^2.2.0",
+    "react-images-upload": "^1.2.8",
     "react-scripts": "3.4.3",
+    "sha256": "^0.2.0",
+    "sqlite3": "^5.0.2",
+    "steganogre": "^0.2.0",
     "string-crypto": "^2.0.2"
   },
   "scripts": {
