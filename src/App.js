@@ -49,7 +49,7 @@ function SignIn() {
       <button className="sign-in" onClick={signInWithGoogle}>
         Sign in with Google
       </button>
-      <p>
+      <p className="sign-in-text">
         Welcome to our encrypted chat app please sign in .
       </p>
     </>
