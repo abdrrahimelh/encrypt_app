@@ -104,7 +104,8 @@ button:disabled {
   color: #282c34;
   background: white;
   max-width: 400px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
