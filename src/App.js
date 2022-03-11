@@ -33,7 +33,7 @@ function App() {
         <SignOut />
       </header>
 
-      <section>{user ? <ChatRoom /> : <SignIn />}</section>
+      <section>{user ? <ChatRoom /> : <ChatRoom />}</section>
     </div>
   );
 }
@@ -50,7 +50,7 @@ function SignIn() {
         Sign in with Google
       </button>
       <p>
-        Do not violate the community guidelines or you will be banned for life!
+        Welcome to our encrypted chat app 
       </p>
     </>
   );
