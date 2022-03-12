@@ -13,6 +13,9 @@ ReactJS-powered chat room.
 
 ![image](https://user-images.githubusercontent.com/72756875/158016070-20ad23ea-6e2c-4522-912b-04ed465a9a5e.png)
 
+![Untitled-1](https://user-images.githubusercontent.com/72756875/158020664-83956d26-4743-4a34-8020-9abef0d38481.jpg)
+
+
 ## Tech
 
 Encrypt App uses a number of open source projects to work properly:
