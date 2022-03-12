@@ -44,7 +44,7 @@ You can download the app and run it on your favorite IDE, or just head to https:
 
 Want to contribute? Great! contact us through our e-mails:
 - ikkou_abdou@hotmail.fr
-- abderrahimelh@gmail.com
+- abdrrahimelhimer@gmail.com
 
 ## License
 
