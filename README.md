@@ -20,4 +20,28 @@ Encrypt App uses a number of open source projects to work properly:
 - Firebase - awesome platform from google.
 - AWS EC2 & emailing service - services from the cloud based platform we all know and love.
 - AES 256-bit encryption - for the safest possible encryption.
-- Steganography - since we have to hide our password while it's being transfered!   
+- Steganography - since we have to hide our password while it's being transferred!   
+
+## Perks
+
+Encrypt App has various perks including:
+
+- Fast and practical communication.
+- Extremely secure environment.
+- 24-hour key refresh rate to avoid all compromisation.
+- Cloud-based scalable solutions.
+- Enjoyable user-experience.
+
+## Demo
+
+You can download the app and run it on your favorite IDE, or just head to https://abdrrahimelh.github.io/encrypt_app/ for a live demo!
+
+## Development
+
+Want to contribute? Great! contact us through our e-mails:
+- ikkou_abdou@hotmail.fr
+- abderrahimelh@gmail.com
+
+## License
+
+MIT
