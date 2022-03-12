@@ -8,6 +8,6 @@ ReactJS-powered chat room.
 - Run the python script to extract the password
 - Paste the password and watch the words  ✨Magically ✨ decipher
 
-## Features
+## The architecture
 
 ![image](https://user-images.githubusercontent.com/72756875/158016070-20ad23ea-6e2c-4522-912b-04ed465a9a5e.png)
