@@ -2,6 +2,7 @@
 ## _The chatting app using encryption and steganography_
 
 Encrypt App is an encryption based communication tool with advanced security measures.
+
 ReactJS-powered chat room.
 
 - Get your key by e-mail
